@@ -8,14 +8,11 @@ class Workout
 
 
   def duration
-    duration = []
+    duration = 0
     @each_workout.each do |exercise|
-      duration << exercise[:duration_in_min]
+      duration += exercise[:duration_in_min]
     end
-    duration = duration.inject(0){ |sum, each_duration|
-        sum +  each_duration
-    }
-
+    return duration
   end
 
   def calories_burned
@@ -46,13 +43,12 @@ class Workout
       categories << exercise[:category]
     end
 
-    categories
     if categories.count('cardio') >= categories.length/2.to_f
-      'cardio'
+      return 'cardio'
     elsif categories.count('strength') >= categories.length/2.to_f
-      'strength'
+      return 'strength'
     else
-      'other'
+      return 'other'
     end
   end
 
